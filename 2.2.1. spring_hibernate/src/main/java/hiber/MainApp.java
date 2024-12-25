@@ -16,7 +16,6 @@ public class MainApp {
 
       UserService userService = context.getBean(UserService.class);
 
-      // Сначала сохраняем машины
       Car car1 = new Car("Toyota", 123);
       Car car2 = new Car("BMW", 456);
       Car car3 = new Car("Audi", 789);
@@ -27,7 +26,6 @@ public class MainApp {
       userService.addCar(car3);
       userService.addCar(car4);
 
-      // Затем создаем пользователей с машинами
       User user1 = new User("User1", "Lastname1", "user1@mail.ru", car1);
       User user2 = new User("User2", "Lastname2", "user2@mail.ru", car2);
       User user3 = new User("User3", "Lastname3", "user3@mail.ru", car3);
@@ -38,7 +36,6 @@ public class MainApp {
       userService.add(user3);
       userService.add(user4);
 
-      // Вывод всех пользователей
       List<User> users = userService.listUsers();
       for (User user : users) {
          System.out.println("Id = " + user.getId());

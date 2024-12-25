@@ -25,9 +25,6 @@ public class AppConfig {
    @Autowired
    private Environment env;
 
-   /**
-    * Конфигурация DataSource для подключения к базе данных.
-    */
    @Bean
    public DataSource getDataSource() {
       DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -38,9 +35,6 @@ public class AppConfig {
       return dataSource;
    }
 
-   /**
-    * Конфигурация фабрики сессий Hibernate.
-    */
    @Bean
    public LocalSessionFactoryBean getSessionFactory() {
       LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
@@ -57,9 +51,6 @@ public class AppConfig {
       return factoryBean;
    }
 
-   /**
-    * Конфигурация менеджера транзакций для Hibernate.
-    */
    @Bean
    public HibernateTransactionManager getTransactionManager() {
       HibernateTransactionManager transactionManager = new HibernateTransactionManager();
