@@ -1,0 +1,57 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Build output
+/target/
+/out/
+
+# Logs
+*.log
+/log/
+/logs/
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*.bak
+
+# Operating System files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Maven dependencies
+/.mvn/
+/mvnw
+/mvnw.cmd
+/settings.xml
+
+# Test reports
+/test-output/
+/surefire-reports/
+/failsafe-reports/
+
+# Database properties (если они содержат чувствительные данные)
+db.properties
+
+# Spring Boot Specific
+/application.properties
+/application.yml
+
+# Environment variables
+.env
+
+# Java class files
+*.class
+
+# JAR/WAR files
+*.jar
+*.war
+
+# Generated files
+hs_err_pid*
+rebel.xml
+rebel-remote.xml

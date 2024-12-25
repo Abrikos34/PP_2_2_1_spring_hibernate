@@ -1,6 +1,7 @@
 package hiber.config;
 
 import hiber.model.User;
+import hiber.model.Car;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,16 +16,18 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-
 @Configuration
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
-@ComponentScan(value = "hiber")
+@ComponentScan(basePackages = "hiber")
 public class AppConfig {
 
    @Autowired
    private Environment env;
 
+   /**
+    * Конфигурация DataSource для подключения к базе данных.
+    */
    @Bean
    public DataSource getDataSource() {
       DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -35,20 +38,28 @@ public class AppConfig {
       return dataSource;
    }
 
+   /**
+    * Конфигурация фабрики сессий Hibernate.
+    */
    @Bean
    public LocalSessionFactoryBean getSessionFactory() {
       LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
       factoryBean.setDataSource(getDataSource());
-      
-      Properties props=new Properties();
+
+      Properties props = new Properties();
       props.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
       props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+      props.put("hibernate.dialect", env.getProperty("hibernate.dialect")); // Убедитесь, что параметр указан в db.properties
 
       factoryBean.setHibernateProperties(props);
-      factoryBean.setAnnotatedClasses(User.class);
+      factoryBean.setAnnotatedClasses(User.class, Car.class); // Добавлены сущности User и Car
+
       return factoryBean;
    }
 
+   /**
+    * Конфигурация менеджера транзакций для Hibernate.
+    */
    @Bean
    public HibernateTransactionManager getTransactionManager() {
       HibernateTransactionManager transactionManager = new HibernateTransactionManager();
